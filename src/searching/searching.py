@@ -1,3 +1,5 @@
+arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,14, 15, 16, 17, 18, 19]
+
 # STRETCH: implement Linear Search				
 def linear_search(arr, target):
   
@@ -21,7 +23,27 @@ def binary_search(arr, target):
   high = len(arr)-1
 
   # TO-DO: add missing code
-
+  # high must be more than low, otherwise must have searched entire array and not found the target 
+  while high >= low:
+    # get middle element index, make sure it's not a float
+    middle = round(low + (high - low)/ 2)
+    # if element at middle index is equal to target -> return index
+    if arr[middle] == target:
+      return middle
+    # if element at middle index is MORE than target, target MUST be on LHS of array -> eliminate RHS of array 
+    elif arr[middle] > target:
+      # set value of high equal to value of middle index - 1 so that 
+      # when the loop runs again (so long as high >= low),
+      # RHS of array is eliminated; 
+      # considers middle of array to be element in between the index of low and the index of current middle of array - 1
+      high = middle - 1
+    # if element at middle index is LESS than target, target MUST be on RHS of array -> eliminate LHS of array
+    elif arr[middle] < target:
+      # set value of low equal to value of middle index + 1 so that 
+      # when the loop runs again (so long as high >= low),
+      # LHS of array is eliminated; 
+      # considers middle of array to be element in between the index of middle element + 1 and the last element of array
+      low = middle + 1
   return -1 # not found
 
 
