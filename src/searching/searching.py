@@ -26,7 +26,7 @@ def binary_search(arr, target):
   # high must be more than low, otherwise must have searched entire array and not found the target 
   while high >= low:
     # get middle element index, make sure it's not a float
-    middle = round(low + (high - low)/ 2)
+    middle = (low + high) // 2
     # if element at middle index is equal to target -> return index
     if arr[middle] == target:
       return middle
@@ -55,3 +55,19 @@ def binary_search_recursive(arr, target, low, high):
   if len(arr) == 0:
     return -1 # array empty
   # TO-DO: add missing if/else statements, recursive calls
+  
+  # if element at middle index is equal to target -> return index
+  if arr[middle] == target:
+    return middle
+    
+  # if element at middle index is MORE than target, target MUST be on LHS of array -> eliminate RHS of array 
+  elif arr[middle] > target:
+    # -> recur passing in middle - 1 as value of high to eliminate RHS of array
+    return binary_search_recursive(arr, target, low, middle - 1)  
+    
+  # if element at middle index is LESS than target, target MUST be on RHS of array -> eliminate LHS of array
+  elif arr[middle] < target:
+    # -> recur passing in middle + 1 as value of low to eliminate LHS of array
+    return binary_search_recursive(arr, target, middle + 1, high) 
+
+  return - 1
