@@ -25,9 +25,18 @@ def selection_sort( arr ):
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort( arr ):
-
+    # loop over entire array from 0 to length of array minus 1
+    for i in range(0, len(arr) - 1):
+        # the last item in the list is already going to be sorted (largest number 'bubbles' to end of list after every pass)
+        # -> there's no need to check last item 
+        # -> j = length of array minus 1 minus i
+        for j in range (0, len(arr) - 1 - i): 
+            # compare the item with the item to the RHS
+            # if item > item to RHS, swap
+            # else break and continue looping through array til all items sorted (ie. i == len(arr) - 1)
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
     return arr
-
 
 # STRETCH: implement the Count Sort function below
 def count_sort( arr, maximum=-1 ):
