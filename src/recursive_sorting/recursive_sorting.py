@@ -35,11 +35,18 @@ def merge( arrA, arrB ):
 # TO-DO: implement the Merge Sort function below USING RECURSION
 def merge_sort( arr ):
     # TO-DO
+    # if length of array is less than two, it can't be split any further -> just return array
     if len(arr) < 2:
         return arr
+    # else get index of middle element of array
     mid = len(arr)//2
+    # set arrA equal to the value of recursively calling merge_sort on all elements up to element at index of mid
+    # will continue to recur until length < 2
     arrA = merge_sort(arr[:mid])
+     # set arrB equal to the value of recursively calling merge_sort on all elements after element at index of mid
+     # will continue to recur until length < 2
     arrB = merge_sort(arr[mid:])
+    # pass arrA and arrB into merge function to merge arrays
     return merge(arrA, arrB)
 
 # STRETCH: implement an in-place merge sort algorithm
