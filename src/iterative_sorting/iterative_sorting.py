@@ -40,5 +40,46 @@ def bubble_sort( arr ):
 
 # STRETCH: implement the Count Sort function below
 def count_sort( arr, maximum=-1 ):
+    # originally had this set to just be count = [0] * 10 -> count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    # was just going to get count of occurences in arr from 0 - 9 (could only pass in array of nums from 0 - 9)
+    # but test was failing
+    # refactored to initialise count to be array countaining 200 zeros -> now you can pass in array containing nums between 0 -200
+    count = [0] * 200
+    # append number * num of occurences in array to output array and return 
+    output = []
+    # count number of occurences of each number in array
+    for i in range(0, len(arr)):
+        # edge case - if value at index i is a negative number,
+        # break and return error message
+        if arr[i] <0:
+            return "Error, negative numbers not allowed in Count Sort"
+            break
+        # else set the value of element in count array at the index of the value of element at index i in original array = its current value + 1
+        # ie. original array = [1, 4, 1]
+        #     count array will eventually be equal to [0, 2, 0, 1.....]  
+        #     (count index = 0, 0 occurences of 0 in original array, count[0] == 0)
+        #     (count index = 1, 2 occurences of 1 in original array, count[1] == 2)
+        else: 
+            count[arr[i]] +=1
+            
+    # loop over count array
+    for j in range(0, len(count)):
+        # if value of element at index j is more than 0, extend the output array with j * value of element at index j
+        # eg. original array = [1, 3, 1]
+        #     count array will eventually be equal to [0, 2, 0, 1.....]  
+        #     where j = 0, count[j] = 0 -> do nothing
+        #     where j = 1, count[j] = 2 
+        #           -> [j] * count[j] = [1, 1]
+        #           -> extend output array with [1, 1]
+        #           -> output array = [1, 1]
+        #     where j = 2, count[j] = 0 -> do nothing 
+        #     where j = 3, count[j] = 1 
+        #           -> [j] * count[j] = [3]
+        #           -> extend output array with [3]
+        #           -> output array = [1, 1, 3]
+       
+        if count[j] > 0:
+            output.extend([j] * count[j])
+    return output
 
-    return arr
+print(count_sort([1, 4, 2, 7, 5, 2, 9, 0, 0]))
